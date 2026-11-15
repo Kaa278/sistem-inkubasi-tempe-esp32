@@ -1,0 +1,29 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "inkubator": {
+      ".read": "auth != null",
+      "sensor": {
+        ".write": "auth != null",
+        ".validate": "newData.hasChildren(['core', 'room', 'hum', 'valid'])"
+      },
+      "actuator": {
+        ".write": "auth != null",
+        ".validate": "newData.hasChildren(['fanOn', 'lampOn']) && !(newData.child('fanOn').val() == true && newData.child('lampOn').val() == true)"
+      },
+      "timers": {
+        ".write": "auth != null",
+        ".validate": "newData.hasChildren(['tIncubation', 'tHeat', 'tFan'])"
+      },
+      "status": {
+        ".write": "auth != null",
+        ".validate": "newData.hasChildren(['mode', 'info'])"
+      },
+      "control": {
+        ".write": "auth != null",
+        ".validate": "newData.hasChildren(['manualFan', 'manualLamp', 'stop']) && !(newData.child('manualFan').val() == true && newData.child('manualLamp').val() == true)"
+      }
+    }
+  }
+}
